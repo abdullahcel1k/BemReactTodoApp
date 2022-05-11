@@ -1,0 +1,155 @@
+:root {
+  --app-corner: 20px;
+  --app-line-color: #dddddd;
+}
+
+@for $i from 1 through 3 {
+  .m-#{$i}{
+    margin: #{$i}rem;
+  }
+}
+
+.container {
+  width: 400px;
+  height: 850px;
+  margin: 5rem auto;
+  border-radius: var(--app-corner);
+  box-shadow: 5px 10px 15px var(--app-line-color);
+}
+
+.header {
+  position: absolute;
+  background-image: url("../public/img/todo-bg.svg");
+  width: inherit;
+  height: 200px;
+  border-top-left-radius: var(--app-corner);
+  border-top-right-radius: var(--app-corner);
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.insert-btn {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  transition: transform 0.7s ease-in-out;
+}
+
+.insert-btn:hover {
+  transform: rotate(360deg);
+}
+
+.todos__container {
+  position: absolute;
+  width: inherit;
+  margin-top: 210px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.todo__item {
+  display: flex;
+  height: 80px;
+  align-items: center;
+  justify-content: space-around;
+}
+.todo__info {
+  width: 70%;
+}
+
+.todo__title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.todo__desc {
+  display: block;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.todo__checkbox {
+  border: 2px solid #00000080;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo__item.completed {
+  background-color: #ebe8ed;
+}
+
+.todo__item.completed .todo__checkbox {
+  background-color: #d186ff;
+  border: 2px solid #8b00e170;
+}
+
+.todo__item.completed .todo__title {
+  text-decoration: line-through;
+}
+
+.modal {
+  position: relative;
+  display: none;
+  height: inherit;
+  background-color: #00000030;
+  border-radius: var(--app-corner);
+}
+
+.modal.show {
+  display: block;
+}
+
+.modal-body {
+  position: absolute;
+  height: 250px;
+  background-color: white;
+  border-radius: var(--app-corner);
+  margin-top: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+
+.todo__form {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+  textarea {
+    height: 100px;
+  }  
+}
+
+.todo__form::placeholder {
+  background-color: #afafaf;
+}
+
+.todo__form input,
+textarea {
+  width: 90%;
+  margin-left: 5%;
+  border: 1px solid var(--app-line-color) !important;
+  background-color: #f9f9f9;
+  color: black;
+  font-size: 23px;
+  margin-bottom: 1rem;
+}
+
+.save-btn {
+  width: 92%;
+  margin-left: 5%;
+  background-color: #d186ff;
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 900;
+  border: 2px solid #8b00e170;
+}
