@@ -97,15 +97,11 @@
 
 .modal {
   position: relative;
-  display: none;
   height: inherit;
   background-color: #00000030;
   border-radius: var(--app-corner);
 }
 
-.modal.show {
-  display: block;
-}
 
 .modal-body {
   position: absolute;
