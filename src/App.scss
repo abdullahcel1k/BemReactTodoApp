@@ -122,6 +122,11 @@
   textarea {
     height: 100px;
   }  
+  .valid-error{
+    color: red;
+    margin-left: auto;
+    margin-right: 5%;
+  }
 }
 
 .todo__form::placeholder {

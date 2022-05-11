@@ -6,12 +6,13 @@ import TodoModal from './components/TodoModal';
 
 function App() {
   const [isShow, setShow] = useState(false);
+
   return (
     <section className="container">
-        <Header setShow={setShow} />
-        <TodoList />
-        {isShow ? <TodoModal setShow={setShow} /> : null}
-      </section>
+      <Header setShow={setShow} />
+      <TodoList />
+      {isShow ? <TodoModal setShow={setShow} /> : null}
+    </section>
   );
 }
 

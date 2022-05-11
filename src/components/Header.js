@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Header = ({ setShow }) => {
+const Header = ({setShow}) => {
  return (
   <section className="header">
    <img

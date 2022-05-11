@@ -35,12 +35,12 @@ const TodoModal = ({ setShow }) => {
      <Form id="todoForm" className="todo__form">
       <input name="title" placeholder="Başlık"
        onChange={handleChange} />
-      {errors.title && touched.title ? <small>{errors.title}</small> : null}
-      <textarea name="desc" placeholder="Açıklama" 
+      {errors.title && touched.title ? <small className='valid-error'>{errors.title}</small> : null}
+      <textarea name='desc' placeholder="Açıklama"
        onChange={handleChange}></textarea>
-      {errors.desc && touched.desc ? <small>{errors.desc}</small> : null}
-      <button type="button" className="save-btn btn"
-       disabled={isSubmitting} onClick={() => { handleSubmit() }}>
+      {errors.desc && touched.desc ? <small className='valid-error'>{errors.desc}</small> : null}
+      <button type="submit" className="save-btn btn"
+       disabled={isSubmitting}>
        <img src="/img/checked.svg" /> CREATE
       </button>
      </Form>
