@@ -4,7 +4,7 @@ import * as yup from 'yup';
 
 let todoFormValidationSchema = yup.object().shape({
  title: yup.string().required("Gardaş eksiksiz gir"),
- desc: yup.string()
+ desc: yup.string().matches("asdfklsafdkljasdfkl", "Lütfen tc kimlik")
 });
 
 const TodoModal = ({ setShow }) => {
@@ -27,7 +27,7 @@ const TodoModal = ({ setShow }) => {
     <Formik
      initialValues={{ title: '', desc: '' }}
      validationSchema={todoFormValidationSchema}
-     onSubmit={(values, { setSubmitting }) => {
+     onSubmit={(values, { setSubmitting, resetForm }) => {
       console.log(values);
      }}
     >{({ isSubmitting, handleSubmit,
