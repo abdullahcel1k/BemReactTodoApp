@@ -4,22 +4,31 @@ import * as yup from 'yup';
 
 let todoFormValidationSchema = yup.object().shape({
  title: yup.string().required("Gardaş eksiksiz gir"),
- desc: yup.string().matches("asdfklsafdkljasdfkl", "Lütfen tc kimlik")
+ desc: yup.string()
 });
+// unique benzeri olmayan bir id üretir, her bir todo item için
+const uniqueIdGenerator = () => {
+ return Math.floor(Math.random() * 100000 + 1);
+};
 
-const TodoModal = ({ setShow }) => {
+const TodoModal = ({ setShow, setTodoList, todoList }) => {
+ const adddTodoItemToList = (newTodoItem) => {
+  setTodoList([...todoList, newTodoItem]);
+ }
+
  useEffect(() => {
   const formModalEl = document.querySelector("#todoFormModal");
 
   formModalEl.addEventListener("click", (e) => {
    if (e.target.id == "todoFormModal") setShow(false);
-
-   // komponentimizin yok olduğunda yapılması
-   // gereken işlemler return kod blokları içinde yapılır
-   return {
-    // kapanma anında şunu
-   }
   });
+
+  // komponentimizin yok olduğunda yapılması
+  // gereken işlemler return kod blokları içinde yapılır
+  return () => {
+   // kapanma anında şunu
+  };
+
  });
  return (
   <div id="todoFormModal" className="modal">
@@ -28,7 +37,10 @@ const TodoModal = ({ setShow }) => {
      initialValues={{ title: '', desc: '' }}
      validationSchema={todoFormValidationSchema}
      onSubmit={(values, { setSubmitting, resetForm }) => {
-      console.log(values);
+      const newTodoItem = { id: uniqueIdGenerator, isComplete: false, ...values };
+      adddTodoItemToList(newTodoItem);
+      setShow(false);
+      document.getElementById("todoForm").reset();
      }}
     >{({ isSubmitting, handleSubmit,
      errors, touched, handleChange }) => (

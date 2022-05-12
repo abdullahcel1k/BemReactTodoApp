@@ -11,12 +11,13 @@ function App() {
   ]);
 
   useEffect(()=> {}, [todoList]);
-  
+
   return (
     <section className="container">
       <Header setShow={setShow} />
       <TodoList todoList={todoList} setTodoList={setTodoList} />
-      {isShow ? <TodoModal setShow={setShow} /> : null}
+      {isShow ? <TodoModal setShow={setShow}
+         setTodoList={setTodoList} todoList={todoList} /> : null}
     </section>
   );
 }
