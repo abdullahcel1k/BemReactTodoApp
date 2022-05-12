@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './App.scss';
 import Header from './components/Header';
@@ -6,19 +7,39 @@ import TodoModal from './components/TodoModal';
 
 function App() {
   const [isShow, setShow] = useState(false);
-  const [todoList, setTodoList] = useState([
-    {id: 72641, title: "asdf", desc: "asdf", isComplete: false}
-  ]);
+  const [todoList, setTodoList] = useState([]);
 
-  useEffect(()=> {}, [todoList]);
+  const getTodos = async () => {
+    var result;
+    try {
+      result = await fetch('https://localhost:44369/api/Todo', {
+        mode: 'no-cors',
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(res => {
+          return res.json();
+        });
+    } catch (ex) {
+      console.log(ex);
+    } finally {
+      console.log(result);
+    }
+
+  };
+
+  getTodos();
+  useEffect(() => {
+  }, [todoList]);
 
   return (
-    <section className="container">
+    todoList.length > 0 ? <section className="container">
       <Header setShow={setShow} />
       <TodoList todoList={todoList} setTodoList={setTodoList} />
       {isShow ? <TodoModal setShow={setShow}
-         setTodoList={setTodoList} todoList={todoList} /> : null}
-    </section>
+        setTodoList={setTodoList} todoList={todoList} /> : null}
+    </section> : null
   );
 }
 

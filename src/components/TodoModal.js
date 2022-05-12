@@ -11,7 +11,9 @@ const uniqueIdGenerator = () => {
  return Math.floor(Math.random() * 100000 + 1);
 };
 
-const TodoModal = ({ setShow, setTodoList, todoList }) => {
+const TodoModal = ({ setShow, 
+ setTodoList, 
+ todoList }) => {
  const adddTodoItemToList = (newTodoItem) => {
   setTodoList([...todoList, newTodoItem]);
  }
@@ -37,7 +39,8 @@ const TodoModal = ({ setShow, setTodoList, todoList }) => {
      initialValues={{ title: '', desc: '' }}
      validationSchema={todoFormValidationSchema}
      onSubmit={(values, { setSubmitting, resetForm }) => {
-      const newTodoItem = { id: uniqueIdGenerator, isComplete: false, ...values };
+      const newTodoItem = 
+      { id: uniqueIdGenerator, isComplete: false, ...values };
       adddTodoItemToList(newTodoItem);
       setShow(false);
       document.getElementById("todoForm").reset();
