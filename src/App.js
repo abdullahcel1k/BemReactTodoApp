@@ -1,46 +1,36 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import './App.scss';
-import Header from './components/Header';
-import TodoList from './components/TodoList';
-import TodoModal from './components/TodoModal';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import "./App.scss";
+import Header from "./components/Header";
+import TodoList from "./components/TodoList";
+import TodoModal from "./components/TodoModal";
 
 function App() {
   const [isShow, setShow] = useState(false);
   const [todoList, setTodoList] = useState([]);
 
   const getTodos = async () => {
-    var result;
-    try {
-      result = await fetch('https://localhost:44369/api/Todo', {
-        mode: 'no-cors',
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-        .then(res => {
-          return res.json();
-        });
-    } catch (ex) {
-      console.log(ex);
-    } finally {
-      console.log(result);
-    }
-
+    axios
+      .get("https://localhost:5001/api/Todo")
+      .then((res) => setTodoList(res.data));
   };
 
-  getTodos();
   useEffect(() => {
-  }, [todoList]);
+    getTodos();
+  }, []);
 
-  return (
-    todoList.length > 0 ? <section className="container">
+  return todoList.length > 0 ? (
+    <section className="container">
       <Header setShow={setShow} />
       <TodoList todoList={todoList} setTodoList={setTodoList} />
-      {isShow ? <TodoModal setShow={setShow}
-        setTodoList={setTodoList} todoList={todoList} /> : null}
-    </section> : null
-  );
+      {isShow ? (
+        <TodoModal
+          setShow={setShow}
+          getTodos={getTodos}
+        />
+      ) : null}
+    </section>
+  ) : null;
 }
 
 export default App;

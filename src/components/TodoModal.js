@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Form, Formik } from 'formik';
 import React, { useEffect } from 'react'
 import * as yup from 'yup';
@@ -6,16 +7,12 @@ let todoFormValidationSchema = yup.object().shape({
  title: yup.string().required("Gardaş eksiksiz gir"),
  desc: yup.string()
 });
-// unique benzeri olmayan bir id üretir, her bir todo item için
-const uniqueIdGenerator = () => {
- return Math.floor(Math.random() * 100000 + 1);
-};
 
-const TodoModal = ({ setShow, 
- setTodoList, 
- todoList }) => {
+const TodoModal = ({ setShow, getTodos }) => {
  const adddTodoItemToList = (newTodoItem) => {
-  setTodoList([...todoList, newTodoItem]);
+  // setTodoList([...todoList, newTodoItem]);
+  axios.post("https://localhost:5001/api/Todo", newTodoItem)
+      .then((res) => console.log(res)).finally(() => {getTodos()});
  }
 
  useEffect(() => {
@@ -40,7 +37,7 @@ const TodoModal = ({ setShow,
      validationSchema={todoFormValidationSchema}
      onSubmit={(values, { setSubmitting, resetForm }) => {
       const newTodoItem = 
-      { id: uniqueIdGenerator, isComplete: false, ...values };
+      { isComplete: false, ...values };
       adddTodoItemToList(newTodoItem);
       setShow(false);
       document.getElementById("todoForm").reset();
