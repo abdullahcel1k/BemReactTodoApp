@@ -11,7 +11,7 @@ let todoFormValidationSchema = yup.object().shape({
 const TodoModal = ({ setShow, getTodos }) => {
  const adddTodoItemToList = (newTodoItem) => {
   // setTodoList([...todoList, newTodoItem]);
-  axios.post("https://localhost:5001/api/Todo", newTodoItem)
+  axios.post("https://localhost:44369/api/Todo", newTodoItem)
       .then((res) => console.log(res)).finally(() => {getTodos()});
  }
 

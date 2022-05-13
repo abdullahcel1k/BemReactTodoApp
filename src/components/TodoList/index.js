@@ -1,20 +1,23 @@
+import axios from 'axios';
 import React from 'react'
 
-const TodoList = ({ todoList, setTodoList }) => {
+const TodoList = ({ todoList, getTodos }) => {
 
   const removeTask = (todoId) => {
-    const filteredItems = todoList
-      .filter(x => x.id != todoId);
-    setTodoList(filteredItems);
+    axios.delete("https://localhost:44369/api/Todo?id=" + todoId)
+      .then(res => {
+        window.alert(`Tebrikler "${res.data.title}" taskınız silindi`);
+      }).finally(() => {
+        getTodos();
+      });
   }
-  const completeTask = (e) => {
-    const findedTodoIndex = todoList
-      .findIndex(x => x.id == e.currentTarget.dataset.id)
-    if (findedTodoIndex != -1) {
-      e.currentTarget.parentNode.classList.toggle("completed")
-      todoList[findedTodoIndex].isComplete = true;
-      setTodoList(todoList);
-    }
+  const completeTask = (todoId) => {
+    axios.patch("https://localhost:44369/api/Todo?id=" + todoId)
+      .then(res => {
+        window.alert(`Tebrikler "${res.data.title}" taskınız güncellendi.`);
+      }).finally(() => {
+        getTodos();
+      });
   }
 
   return (
@@ -22,7 +25,7 @@ const TodoList = ({ todoList, setTodoList }) => {
       {todoList.map((todoItem, index) => {
         return <div key={index} className={"todo__item " + (todoItem.isComplete ? "completed" : "")} data-id={todoItem.id}>
           <div className="todo__checkbox btn" data-id={todoItem.id
-          } onClick={(e) => { completeTask(e) }}>
+          } onClick={(e) => { completeTask(todoItem.id) }}>
             <img src="/img/checked.svg" />
           </div>
           <div className="todo__info">

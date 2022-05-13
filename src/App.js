@@ -11,7 +11,7 @@ function App() {
 
   const getTodos = async () => {
     axios
-      .get("https://localhost:5001/api/Todo")
+      .get("https://localhost:44369/api/Todo")
       .then((res) => setTodoList(res.data));
   };
 
@@ -19,10 +19,10 @@ function App() {
     getTodos();
   }, []);
 
-  return todoList.length > 0 ? (
+  return (
     <section className="container">
       <Header setShow={setShow} />
-      <TodoList todoList={todoList} setTodoList={setTodoList} />
+      <TodoList todoList={todoList} getTodos={getTodos} />
       {isShow ? (
         <TodoModal
           setShow={setShow}
@@ -30,7 +30,7 @@ function App() {
         />
       ) : null}
     </section>
-  ) : null;
+  )
 }
 
 export default App;
