@@ -4,6 +4,7 @@ import "./App.scss";
 import Header from "./components/Header";
 import TodoList from "./components/TodoList";
 import TodoModal from "./components/TodoModal";
+import "./utils/interceptor";
 
 function App() {
   const [isShow, setShow] = useState(false);
