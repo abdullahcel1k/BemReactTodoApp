@@ -12,7 +12,7 @@ function App() {
 
   const getTodos = async () => {
     axios
-      .get("https://localhost:44369/api/Todo")
+      .get("Todo")
       .then((res) => setTodoList(res.data));
   };
 

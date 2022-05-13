@@ -12,7 +12,7 @@ const TodoList = ({ todoList, getTodos }) => {
       });
   }
   const completeTask = (todoId) => {
-    axios.patch("https://localhost:44369/api/Todo?id=" + todoId)
+    axios.patch("Todo?id=" + todoId)
       .then(res => {
         window.alert(`Tebrikler "${res.data.title}" taskınız güncellendi.`);
       }).finally(() => {
